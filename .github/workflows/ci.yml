@@ -32,7 +32,8 @@ jobs:
       - run: uv run pytest
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    # 복제 레포(trend-2 등)도 owner 가 같아 IMAGE 가 운영 이미지와 겹친다. 원본 레포에서만 배포한다.
+    if: github.ref == 'refs/heads/main' && github.repository == 'yeotaeho/trend'
     needs: check
     runs-on: ubuntu-latest
     permissions:
